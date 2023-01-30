@@ -1,14 +1,17 @@
-import React, {useEffect} from 'react';
-import {useState} from 'react';
-import {getDblTimeClock} from './DateUntilFunction';
+import { useEffect } from 'react';
+import { useState } from 'react';
+import { AnalogClockView } from './AnalogClockView';
+import { DigitalClockView } from './DigitalClockView';
 
+type PropsType = {
+    mode?: 'digital' | 'analog'
+}
 
-
-export const Clock = (any: any) => {
+export const Clock = (props: PropsType) => {
     const [date, setDate] = useState(new Date())
 
     useEffect(() => {
-        const IntervalId = setInterval( () => {
+        const IntervalId = setInterval(() => {
             console.log("Tick")
             setDate(new Date())
         }, 1000)
@@ -17,10 +20,22 @@ export const Clock = (any: any) => {
         }
     }, [])
 
+    let view;
+
+    switch (props.mode) {
+        case 'analog':
+            view = <AnalogClockView date={date}/>
+            break;
+        case 'digital':
+        default:
+            view = <DigitalClockView date={date}/>
+    }
 
     return <>
-        <span>{getDblTimeClock(date.getHours())}</span>
-        :<span>{getDblTimeClock(date.getMinutes())}</span>
-        :<span>{getDblTimeClock(date.getSeconds())}</span>
+        {view}
     </>
+}
+
+export type ClockViewPropsType = {
+    date: Date
 }

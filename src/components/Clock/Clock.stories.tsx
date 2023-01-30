@@ -3,7 +3,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import {Clock} from './Clock';
 
 export default {
-    title: 'Clock/Clock',
+    title: 'clock/clock',
     component: Clock,
     parameters: {
         // More on Story layout: https://storybook.js.org/docs/react/configure/story-layout
@@ -13,7 +13,8 @@ export default {
 
 const Template: ComponentStory<typeof Clock> = (args) => <Clock {...args} />;
 
-export const BaseClockTemplate = Template.bind({});
-BaseClockTemplate.args = {
+export const BaseAnalogTemplate = Template.bind({});
+BaseAnalogTemplate.args = { mode: "analog" };
 
-};
+export const BaseDigitalTemplate = Template.bind({});
+BaseDigitalTemplate.args = { mode: "digital" };
